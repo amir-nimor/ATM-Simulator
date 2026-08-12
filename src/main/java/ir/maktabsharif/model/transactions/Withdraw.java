@@ -2,12 +2,14 @@ package ir.maktabsharif.model.transactions;
 
 import ir.maktabsharif.model.BaseModel;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import org.hibernate.annotations.Check;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Objects;
 
+@Entity
 public class Withdraw extends BaseModel<BigInteger> {
 
     @Column(name = "withdraw_acount",nullable = false,unique = true)
@@ -23,6 +25,10 @@ public class Withdraw extends BaseModel<BigInteger> {
     public Withdraw(Long withdrawAccountId, BigDecimal amount) {
         WithdrawAccountId = withdrawAccountId;
         this.amount = amount;
+    }
+
+    public Withdraw() {
+
     }
 
     public Long getWithdrawAccountId() {

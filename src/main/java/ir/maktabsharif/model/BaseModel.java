@@ -8,6 +8,7 @@ import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @MappedSuperclass()
 public class BaseModel <ID>{
@@ -29,5 +30,25 @@ public class BaseModel <ID>{
 
     public LocalDateTime getCreateAt() {
         return createAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseModel<?> baseModel = (BaseModel<?>) o;
+        return Objects.equals(id, baseModel.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "BaseModel{" +
+                "id=" + id +
+                ", createAt=" + createAt +
+                '}';
     }
 }

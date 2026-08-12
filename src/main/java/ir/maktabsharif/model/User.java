@@ -1,6 +1,7 @@
 package ir.maktabsharif.model;
 
 import ir.maktabsharif.model.transactions.ChangePassword;
+import ir.maktabsharif.model.transactions.ChangeUsername;
 import ir.maktabsharif.model.transactions.GetSecondPassword;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,6 +33,9 @@ public class User extends BaseModel<Long>{
 
     @OneToOne(mappedBy = "user")
     private ChangePassword changePassword;
+
+    @OneToOne(mappedBy = "user")
+    private ChangeUsername changeUsername;
 
     //=========================================================
 

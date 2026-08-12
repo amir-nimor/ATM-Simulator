@@ -16,8 +16,9 @@ public class User extends BaseModel<Long>{
     private String password;
     @Column(name = "full_name",nullable = false)
     private String fullName;
+    @Check(constraints = "balance > 0")
     private BigDecimal balance;
-    @Column(name = "phone_number",nullable = false)
+    @Column(name = "phone_number",nullable = false,unique = true)
     private String phoneNumber;
 
     public User(String username, String password, String fullName, String phoneNumber) {

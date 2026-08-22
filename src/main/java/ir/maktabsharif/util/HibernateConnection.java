@@ -1,6 +1,5 @@
 package ir.maktabsharif.util;
 
-import ir.maktabsharif.exception.HibernateConnectionExcetion;
 import jakarta.persistence.*;
 
 import java.util.function.Function;
@@ -37,7 +36,7 @@ public class HibernateConnection {
             if (tx.isActive()) {
                 tx.rollback();
             }
-            throw new HibernateConnectionExcetion("Operation Failed!");
+            throw new HibernateConnectionExcetion("Operation Failed!"+e.getMessage());
         } finally {
             em.close();
         }

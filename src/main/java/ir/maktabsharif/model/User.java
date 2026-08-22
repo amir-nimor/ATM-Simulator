@@ -1,53 +1,50 @@
 package ir.maktabsharif.model;
 
-import ir.maktabsharif.model.transactions.ChangePassword;
-import ir.maktabsharif.model.transactions.ChangeUsername;
-import ir.maktabsharif.model.transactions.GetSecondPassword;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.Check;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Check(constraints = "balance > 0")
-public class User extends BaseModel<Long>{
-    @Column(name = "user_name",nullable = false,unique = true)
-    private String username;
-    @Column(unique = true,nullable = false)
-    private String password;
+@Table(name = "users")
+public class User extends BaseModel<Long> {
+
     @Column(name = "full_name",nullable = false)
     private String fullName;
-    @Check(constraints = "balance > 0")
-    private BigDecimal balance;
+    @Column(unique = true,nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
     @Column(name = "phone_number",nullable = false,unique = true)
     private String phoneNumber;
+    @Check(constraints = "balance > 0")
+    private BigDecimal balance;
+    @Embedded
+    private UserAddres userAddres;
 
-
-    //========================================================
-
-    @OneToOne(mappedBy = "user")
-    private GetSecondPassword getSecondPassword;
-
-    @OneToOne(mappedBy = "user")
-    private ChangePassword changePassword;
-
-    @OneToOne(mappedBy = "user")
-    private ChangeUsername changeUsername;
-
-    //=========================================================
-
-    public User(String username, String password, String fullName, String phoneNumber) {
-        setUsername(username);
-        setPassword(password);
-        setFullName(fullName);
-        setPhoneNumber(phoneNumber);
-        this.balance = BigDecimal.valueOf(0);
+    public User(String fullName, String username, String password, String phoneNumber, UserAddres userAddres) {
+        this.fullName = fullName;
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.userAddres = userAddres;
+        this.balance = new BigDecimal(1);
     }
 
     public User() {
+
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getUsername() {
@@ -66,12 +63,12 @@ public class User extends BaseModel<Long>{
         this.password = password;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public BigDecimal getBalance() {
@@ -82,34 +79,23 @@ public class User extends BaseModel<Long>{
         this.balance = balance;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public UserAddres getUserAddres() {
+        return userAddres;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(username, user.username);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(username);
+    public void setUserAddres(UserAddres userAddres) {
+        this.userAddres = userAddres;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "fullName='" + fullName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", balance=" + balance +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", balance=" + balance +
+                ", userAddres=" + userAddres +
                 '}';
     }
 }

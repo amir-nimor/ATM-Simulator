@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @MappedSuperclass()
-public class BaseModel <ID>{
+public class BaseModel <ID extends Number>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id;
@@ -32,6 +32,10 @@ public class BaseModel <ID>{
         return createAt;
     }
 
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -48,7 +52,6 @@ public class BaseModel <ID>{
     public String toString() {
         return "BaseModel{" +
                 "id=" + id +
-                ", createAt=" + createAt +
                 '}';
     }
 }

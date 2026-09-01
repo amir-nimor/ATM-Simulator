@@ -9,7 +9,7 @@ import org.hibernate.annotations.Check;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usersss")
 public class User extends BaseModel<Long> {
 
     @Column(name = "full_name",nullable = false)

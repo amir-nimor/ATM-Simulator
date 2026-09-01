@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.Check;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -24,14 +23,14 @@ public class User extends BaseModel<Long> {
     @Check(constraints = "balance > 0")
     private BigDecimal balance;
     @Embedded
-    private UserAddres userAddres;
+    private UserAddress userAddress;
 
-    public User(String fullName, String username, String password, String phoneNumber, UserAddres userAddres) {
+    public User(String fullName, String username, String password, String phoneNumber, UserAddress userAddress) {
         this.fullName = fullName;
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.userAddres = userAddres;
+        this.userAddress = userAddress;
         this.balance = new BigDecimal(1);
     }
 
@@ -79,12 +78,12 @@ public class User extends BaseModel<Long> {
         this.balance = balance;
     }
 
-    public UserAddres getUserAddres() {
-        return userAddres;
+    public UserAddress getUserAddres() {
+        return userAddress;
     }
 
-    public void setUserAddres(UserAddres userAddres) {
-        this.userAddres = userAddres;
+    public void setUserAddres(UserAddress userAddress) {
+        this.userAddress = userAddress;
     }
 
     @Override
@@ -95,7 +94,7 @@ public class User extends BaseModel<Long> {
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", balance=" + balance +
-                ", userAddres=" + userAddres +
+                ", userAddress=" + userAddress +
                 '}';
     }
 }

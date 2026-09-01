@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class UserAddres {
+public class UserAddress {
 
 
     @Column(nullable = false)
@@ -15,13 +15,13 @@ public class UserAddres {
     private String postalCode;
 
 
-    public UserAddres(String city, String street, String postalCode) {
+    public UserAddress(String city, String street, String postalCode) {
         this.city = city;
         this.street = street;
         this.postalCode = postalCode;
     }
 
-    public UserAddres() {
+    public UserAddress() {
 
     }
 
